@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AJAY SHIRALE - 3D Portfolio</title>
+<style>
+:root{--bg:#d9d9db;--panel:rgba(252,252,252,.94);--nav:#ffffff;--ink:#222222;--muted:#666a70;--soft:#777;--card:linear-gradient(135deg,#fafafa,#f1f1f2);--edge:#4d4f53;--chip:#ececee;--field:#ffffff;--line:#d5d6da;--btn:#4d4f53;--shadow:rgba(0,0,0,.16);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171b;--panel:rgba(30,33,39,.94);--nav:#1e2127;--ink:#f1f2f4;--muted:#a9aeb8;--soft:#9aa0ab;--card:linear-gradient(135deg,#252932,#1f2229);--edge:#9aa0ab;--chip:#2c3039;--field:#171a1f;--line:#343944;--btn:#5b606b;--shadow:rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15171b;--panel:rgba(30,33,39,.94);--nav:#1e2127;--ink:#f1f2f4;--muted:#a9aeb8;--soft:#9aa0ab;--card:linear-gradient(135deg,#252932,#1f2229);--edge:#9aa0ab;--chip:#2c3039;--field:#171a1f;--line:#343944;--btn:#5b606b;--shadow:rgba(0,0,0,.5);color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.7 "Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--nav);z-index:50}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;filter:blur(6px)}
+header,main,footer{position:relative;z-index:1}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--nav);box-shadow:0 4px 18px var(--shadow)}
+nav{display:flex;align-items:center;gap:32px;padding:0 40px;height:70px;overflow-x:auto}
+.logo{font-weight:700;font-size:34px;color:var(--edge);text-decoration:none;margin-right:auto;letter-spacing:-.5px}
+nav a:not(.logo){color:var(--ink);text-decoration:none;font-weight:500;font-size:17px;opacity:.82;white-space:nowrap}
+nav a:not(.logo):hover{opacity:1}
+:focus-visible{outline:2px solid var(--edge);outline-offset:3px}
+h1,h2,h3{margin:0;line-height:1.2}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;min-height:calc(100vh - 70px);padding:40px 80px}
+.hero-l{text-align:center}
+.hero h1{font-size:clamp(40px,6vw,72px);font-weight:700}
+.hero h1 span{color:var(--soft)}
+.tag{font-size:clamp(17px,2vw,24px);color:var(--muted);margin:26px auto 34px;max-width:30em}
+.btn{display:inline-block;background:var(--btn);color:#fff;padding:16px 50px;border-radius:999px;text-decoration:none;font-weight:600;font-size:18px;border:0;cursor:pointer;box-shadow:0 8px 22px var(--shadow);transition:transform .2s}
+.btn:hover{transform:translateY(-3px)}
+.social{display:flex;justify-content:center;gap:24px;margin-top:34px}
+.social a{display:grid;place-items:center;width:66px;height:66px;border-radius:50%;background:var(--btn);color:#fff;box-shadow:0 8px 20px var(--shadow);transition:transform .2s}
+.social a:hover{transform:translateY(-4px) scale(1.06)}
+.social svg{width:34px;height:34px;fill:currentColor}
+.hero-r{display:grid;place-items:center}
+.photo{width:min(500px,100%);aspect-ratio:1;border-radius:34px;box-shadow:0 30px 60px var(--shadow);background:linear-gradient(145deg,#2f3238,#1a1c23);overflow:hidden;position:relative;display:grid;place-items:center}
+.photo canvas{width:100%!important;height:100%!important;display:block}
+.panel{background:var(--panel);border-radius:30px;margin:0 0 40px;padding:70px 40px 80px;box-shadow:0 10px 40px var(--shadow)}
+.panel h2{text-align:center;font-size:clamp(34px,5vw,54px);font-weight:700;padding-bottom:18px;position:relative;margin-bottom:56px}
+.panel h2::after{content:"";position:absolute;left:50%;bottom:0;width:124px;height:4px;border-radius:4px;background:var(--soft);transform:translateX(-50%)}
+.about{max-width:1000px;margin:auto;text-align:center;color:var(--muted);font-size:20px;line-height:1.95}
+.about p{margin:0 0 22px}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;max-width:1760px;margin:auto}
+.card{background:var(--card);border-radius:22px;border-left:5px solid var(--edge);padding:38px 36px;min-height:220px;box-shadow:0 6px 22px var(--shadow);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-8px);box-shadow:0 18px 36px var(--shadow)}
+.card h3{font-size:23px;font-weight:700;margin-bottom:18px}
+.card p{margin:0;color:var(--muted);font-size:18px;line-height:1.8}
+.tl{position:relative;max-width:1760px;margin:auto;display:grid;gap:50px}
+.tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;background:#9c9ea4;transform:translateX(-50%);border-radius:4px}
+.job{position:relative;width:calc(50% - 40px)}
+.job:nth-child(even){margin-left:calc(50% + 40px)}
+.job:nth-child(odd){text-align:right;border-left:0;border-radius:22px;border-right:0}
+.job:nth-child(odd).card{border-left:0}
+.job::after{content:"";position:absolute;top:34px;width:20px;height:20px;border-radius:50%;background:var(--edge);box-shadow:0 0 0 6px var(--panel),0 0 0 8px var(--line)}
+.job:nth-child(odd)::after{right:-50px}
+.job:nth-child(even)::after{left:-50px}
+.job h3{font-size:21px}
+.when{color:var(--soft);margin:8px 0 14px;font-size:17px}
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;max-width:1760px;margin:auto}
+.proj{background:var(--card);border-radius:22px;overflow:hidden;box-shadow:0 6px 22px var(--shadow);display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s}
+.proj:hover{transform:translateY(-8px);box-shadow:0 18px 36px var(--shadow)}
+.thumb{height:250px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:26px;text-align:center;padding:20px}
+.t1{background:linear-gradient(135deg,#2b3a67,#4a5fa8)}.t2{background:linear-gradient(135deg,#1f5f5b,#3aa39b)}.t3{background:linear-gradient(135deg,#4a3a2a,#8a6a45)}.t4{background:linear-gradient(135deg,#3b2f4f,#6c5a8c)}
+.pb{padding:30px 32px 34px;display:flex;flex-direction:column;gap:14px;flex:1}
+.pb h3{font-size:22px}
+.pb p{margin:0;color:var(--muted);font-size:17.5px;line-height:1.75;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:var(--chip);border-radius:999px;padding:7px 18px;font-size:16px}
+.note{color:var(--soft);font-size:15px}
+.ach{max-width:1100px;margin:auto;color:var(--muted);font-size:19px;line-height:1.95}
+.ach p{margin:0 0 6px}
+.ach b{color:var(--ink)}
+.formcard{max-width:650px;margin:0 auto;background:var(--card);border-radius:26px;border-left:7px solid var(--edge);padding:48px 54px;box-shadow:0 14px 40px var(--shadow)}
+.lead{text-align:center;color:var(--muted);font-size:20px;margin:-20px 0 34px}
+label{display:block;font-weight:600;margin:0 0 8px}
+input,textarea{width:100%;font:400 17px "Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:22px}
+textarea{min-height:160px;resize:vertical}
+#msg{min-height:1.4em;margin:14px 0 0;color:var(--muted);font-size:15px}
+.alt{text-align:center;margin-top:30px;color:var(--muted);font-size:16px}
+.alt a{color:var(--ink);font-weight:600}
+footer{text-align:center;padding:20px 20px 50px;color:var(--muted);font-size:16px}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.card:hover,.proj:hover,.btn:hover{transform:none}}
+@media (max-width:900px){
+  nav{gap:20px;padding:0 20px}
+  .hero{grid-template-columns:1fr;padding:30px 24px}
+  .hero-r{order:-1}.photo{width:min(320px,80%)}
+  .panel{padding:56px 22px 60px;border-radius:24px}
+  .tl::before{left:12px}
+  .job,.job:nth-child(even){width:auto;margin-left:36px;text-align:left}
+  .job:nth-child(odd)::after,.job:nth-child(even)::after{left:-34px;right:auto}
+  .job:nth-child(odd).card{border-left:5px solid var(--edge)}
+  .formcard{padding:34px 24px}
+}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<header><nav>
+<a class="logo" href="#hero" aria-label="Home">AS</a>
+<a href="#hero">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a href="#contact">Contact</a>
+</nav></header>
+
+<main>
+<section class="hero" id="hero">
+<div class="hero-l">
+<h1>Hi, I’m <span>AJAY SHIRALE</span></h1>
+<p class="tag">Full Stack .NET Developer | C# | ASP.NET Core | Angular | SQL Server</p>
+<a class="btn" href="#projects">View My Work</a>
+<div class="social">
+<a href="https://linkedin.com/in/ajay-shirale" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+<a href="https://github.com/ajay-shirale" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.95.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+<a href="mailto:ashirale445@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.6 7.2v.4L12 12.8l7.4-5.2v-.4z"/></svg></a>
+</div>
+</div>
+<div class="hero-r"><div class="photo" id="desk-container" role="img" aria-label="3D Desktop Setup"></div></div>
+</section>
+
+<section class="panel rv" id="about">
+<h2>About Me</h2>
+<div class="about">
+<p>I’m a Software Developer based in Pune, India, with nearly 5 years of professional experience in software development and enterprise applications. I specialize in C#, .NET, ASP.NET MVC, RESTful APIs, SQL Server and Angular, developing, maintaining and optimizing business applications.</p>
+<p>I’m currently an Associate Consultant at Infosys and previously worked at Capgemini, contributing to enterprise solutions for global clients. I enjoy solving complex problems, improving application performance and continuously expanding my technical knowledge, to build reliable, scalable and user-friendly applications that deliver meaningful business value.</p>
+</div>
+</section>
+
+<section class="panel rv" id="skills">
+<h2>Skills &amp; Expertise</h2>
+<div class="skills">
+<div class="card"><h3>Programming Languages</h3><p>C#, SQL, JavaScript, TypeScript</p></div>
+<div class="card"><h3>Backend</h3><p>.NET Core, .NET Framework, ASP.NET MVC, ASP.NET Web API</p></div>
+<div class="card"><h3>Frontend</h3><p>Angular, HTML5, CSS3, Bootstrap</p></div>
+<div class="card"><h3>Databases</h3><p>SQL Server, Entity Framework, LINQ</p></div>
+<div class="card"><h3>Cloud</h3><p>Microsoft Azure (Fundamentals)</p></div>
+<div class="card"><h3>Tools</h3><p>Visual Studio, VS Code, Git, Postman</p></div>
+<div class="card"><h3>Practices</h3><p>REST APIs, OOP, Debugging, Root Cause Analysis, Performance Optimization</p></div>
+</div>
+</section>
+
+<section class="panel rv" id="experience">
+<h2>Experience</h2>
+<div class="tl">
+<div class="job card"><h3>Associate Consultant – Infosys Limited</h3><div class="when">February 2025 – Present</div><p>Developing and maintaining enterprise applications for Boeing, focusing on automation, database operations, API integrations, production support and application performance optimization.</p></div>
+<div class="job card"><h3>Senior Software Engineer – Capgemini</h3><div class="when">December 2021 – February 2025</div><p>Contributed to enterprise application development for Liberty Mutual Insurance using C#, .NET, SQL Server and related technologies, focusing on development, maintenance, debugging and performance improvements.</p></div>
+</div>
+</section>
+
+<section class="panel rv" id="projects">
+<h2>Featured Projects</h2>
+<div class="projects">
+<a class="proj" href="https://github.com/ajay-shirale" target="_blank" rel="noopener"><div class="thumb t1">Employee Travel Management</div><div class="pb"><h3>Employee Travel Management System</h3><p>Web application that streamlines employee travel requests and management. Reduced manual processing by 30% while handling 500+ monthly transactions.</p><div class="chips"><span class="chip">ASP.NET MVC</span><span class="chip">C#</span><span class="chip">Entity Framework</span><span class="chip">SQL Server</span><span class="chip">Azure</span></div></div></a>
+<a class="proj" href="https://github.com/ajay-shirale" target="_blank" rel="noopener"><div class="thumb t2">Electricity Bill Management</div><div class="pb"><h3>Electricity Bill Management System</h3><p>Application that simplifies electricity billing and automates notifications, supporting 20+ businesses and improving billing efficiency by 25%.</p><div class="chips"><span class="chip">Angular</span><span class="chip">REST API</span><span class="chip">Firebase</span></div></div></a>
+<div class="proj"><div class="thumb t3">Enterprise Workflow Automation</div><div class="pb"><h3>Enterprise Workflow Automation</h3><p>Automation for SAP operations, SQL database integration, reconciliation reporting, email monitoring and approval workflows.</p><div class="chips"><span class="chip">AssistEdge</span><span class="chip">SQL Server</span><span class="chip">REST APIs</span><span class="chip">PowerShell</span><span class="chip">SAP</span></div><span class="note">Private enterprise project</span></div></div>
+<div class="proj"><div class="thumb t4">Enterprise Insurance Application</div><div class="pb"><h3>Enterprise Insurance Application</h3><p>Development and maintenance of enterprise insurance software, focused on backend functionality, debugging, application stability and performance optimization.</p><div class="chips"><span class="chip">C#</span><span class="chip">.NET</span><span class="chip">SQL Server</span><span class="chip">WPF</span><span class="chip">WCF</span></div><span class="note">Private enterprise project</span></div></div>
+</div>
+</section>
+
+<section class="panel rv" id="achievements">
+<h2>Achievements</h2>
+<div class="ach">
+<p><b>~5 Years of Experience</b> – Enterprise software development across global clients.</p>
+<p><b>20% Faster API Response</b> – Achieved through application optimization.</p>
+<p><b>25% Fewer Production Defects</b> – Through monitoring and root cause analysis.</p>
+<p><b>500+ Monthly Transactions</b> – Handled by the Employee Travel Management System.</p>
+<p><b>EdgeVerve AI Next Digital Worker Professional</b> – Assessment score: 84.</p>
+</div>
+</section>
+
+<section class="panel rv" id="contact">
+<h2>Get In Touch</h2>
+<p class="lead">I’d love to hear from you. Let’s connect!</p>
+<form class="formcard" id="form">
+<label for="n">Name</label><input id="n" name="name" placeholder="Your name" required autocomplete="name">
+<label for="e">Email</label><input id="e" name="email" type="email" placeholder="your@email.com" required autocomplete="email">
+<label for="m">Message</label><textarea id="m" name="message" placeholder="Send a message to connect..." required></textarea>
+<button class="btn" type="submit">Send message</button>
+<p id="msg" role="status"></p>
+<p class="alt">Or email me directly at <a href="mailto:ashirale445@gmail.com">ashirale445@gmail.com</a></p>
+</form>
+</section>
+</main>
+<footer>© 2026 AJAY SHIRALE. All rights reserved.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.06});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+
+// 3D Desk Setup for Hero Section
+try {
+  const container = document.getElementById("desk-container");
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.set(0, 3, 7);
+  camera.lookAt(0, 0, 0);
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  // Lighting
+  scene.add(new THREE.AmbientLight(0xffffff, 0.9));
+  const dirLight = new THREE.DirectionalLight(0x60a5fa, 1.2);
+  dirLight.position.set(5, 8, 5);
+  scene.add(dirLight);
+
+  const deskGroup = new THREE.Group();
+
+  // Desk Surface
+  const deskMat = new THREE.MeshStandardMaterial({ color: 0x27272a, roughness: 0.3 });
+  const deskMesh = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.15, 2.2), deskMat);
+  deskMesh.position.y = -0.5;
+  deskGroup.add(deskMesh);
+
+  // Monitor Stand & Screen
+  const standMat = new THREE.MeshStandardMaterial({ color: 0x18181b, metalness: 0.8, roughness: 0.2 });
+  const screenBack = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.4, 0.1), standMat);
+  screenBack.position.set(0, 0.5, -0.6);
+  deskGroup.add(screenBack);
+
+  // Glowing Monitor Display Panel
+  const displayMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+  const displayMesh = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 1.2), displayMat);
+  displayMesh.position.set(0, 0.5, -0.54);
+  deskGroup.add(displayMesh);
+
+  // Keyboard
+  const kbMesh = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.05, 0.4), standMat);
+  kbMesh.position.set(0, -0.4, 0.4);
+  deskGroup.add(kbMesh);
+
+  // Mouse
+  const mouseMesh = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.04, 0.3), standMat);
+  mouseMesh.position.set(0.9, -0.4, 0.4);
+  deskGroup.add(mouseMesh);
+
+  scene.add(deskGroup);
+
+  // Mouse Reactivity
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener("pointermove", (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 0.6;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 0.6;
+  });
+
+  const animate = () => {
+    requestAnimationFrame(animate);
+    if (!reduce) {
+      deskGroup.rotation.y += (mouseX - deskGroup.rotation.y) * 0.05;
+      deskGroup.rotation.x += (mouseY - deskGroup.rotation.x) * 0.05;
+    }
+    renderer.render(scene, camera);
+  };
+  animate();
+
+  window.addEventListener("resize", () => {
+    if (container.clientWidth > 0) {
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+  });
+} catch(e) {}
+
+try{
+  const dark=matchMedia("(prefers-color-scheme:dark)").matches;
+  const cv=document.getElementById("bg"),R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
+  R.setPixelRatio(Math.min(devicePixelRatio,2));
+  const S=new THREE.Scene(),C=new THREE.PerspectiveCamera(50,1,.1,100);C.position.z=12;
+  S.add(new THREE.AmbientLight(0xffffff,dark?.5:.75));
+  const L=new THREE.DirectionalLight(0xffffff,dark?.8:.9);L.position.set(4,6,8);S.add(L);
+  const m=()=>new THREE.MeshStandardMaterial({color:dark?0x6a6f7a:0x8d8d90,roughness:.45,metalness:.1});
+  const cone=new THREE.Mesh(new THREE.ConeGeometry(1.5,2.6,3),m()),box=new THREE.Mesh(new THREE.BoxGeometry(2.2,2.2,2.2),m()),sph=new THREE.Mesh(new THREE.SphereGeometry(1.7,32,32),m()),cap=new THREE.Mesh(new THREE.CapsuleGeometry?new THREE.CapsuleGeometry(.6,2.2,6,16):new THREE.CylinderGeometry(.6,.6,3,16),m()),dia=new THREE.Mesh(new THREE.OctahedronGeometry(1.5),m());
+  cone.position.set(1.6,2.6,0);box.position.set(-1.6,.4,-1);sph.position.set(1.4,0,.5);cap.position.set(4.2,-.6,-1);dia.position.set(.4,-3,0);
+  const g=new THREE.Group();g.add(cone,box,sph,cap,dia);g.position.x=1.2;S.add(g);
+  const fit=()=>{R.setSize(innerWidth,innerHeight,false);C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix();g.position.x=innerWidth<900?0:1.2};fit();addEventListener("resize",fit);
+  let mx=0,my=0;addEventListener("pointermove",e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+  const draw=t=>{
+    const s=scrollY*.002;
+    if(!reduce){cone.rotation.set(t*.0003+s,t*.0004,0);box.rotation.set(t*.0002,t*.0003+s,0);dia.rotation.set(t*.0004,t*.0002+s,0);cap.rotation.z=t*.0003+s;sph.position.y=Math.sin(t*.001)*.25}
+    g.rotation.y+=(mx*.5-g.rotation.y)*.05;g.rotation.x+=(my*.3-g.rotation.x)*.05;
+    R.render(S,C);if(!reduce)requestAnimationFrame(draw);
+  };
+  requestAnimationFrame(draw);if(reduce)addEventListener("scroll",()=>requestAnimationFrame(draw));
+}catch(e){}
+
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const f=new FormData(e.target),body=encodeURIComponent(`${f.get("message")}\n\nFrom: ${f.get("name")} (${f.get("email")})`);
+  location.href=`mailto:ashirale445@gmail.com?subject=${encodeURIComponent("Portfolio message from "+f.get("name"))}&body=${body}`;
+  document.getElementById("msg").textContent="Opening your email app to send the message.";
+});
+</script>
+</body>
+</html>
